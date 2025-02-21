@@ -1,422 +1,636 @@
 ---
-theme: apple-basic
-title: Introduction to Bioinformatics
+# You can also start simply with 'default'
+theme: seriph
+# random image from a curated Unsplash collection by Anthony
+# like them? see https://unsplash.com/collections/94734566/slidev
+background: https://cover.sli.dev
+# some information about your slides (markdown enabled)
+title: Welcome to Slidev
+info: |
+  ## Slidev Starter Template
+  Presentation slides for developers.
+
+  Learn more at [Sli.dev](https://sli.dev)
+# apply unocss classes to the current slide
+class: text-center
+# https://sli.dev/features/drawing
+drawings:
+  persist: false
+# slide transition: https://sli.dev/guide/animations.html#slide-transitions
 transition: slide-left
-author: Manish Datt
-browserExporter: dev
-download: false
-layout: statement 
+# enable MDC Syntax: https://sli.dev/features/mdc
+mdc: true
 ---
 
-# Introduction to Bioinformatics
+# Welcome to Slidev
+
+Presentation slides for developers
+
+<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
+  Press Space for next page <carbon:arrow-right />
+</div>
+
+<div class="abs-br m-6 text-xl">
+  <button @click="$slidev.nav.openInEditor" title="Open in Editor" class="slidev-icon-btn">
+    <carbon:edit />
+  </button>
+  <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn">
+    <carbon:logo-github />
+  </a>
+</div>
+
+<!--
+The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
+-->
+
+---
+transition: fade-out
+---
+
+# What is Slidev?
+
+Slidev is a slides maker and presenter designed for developers, consist of the following features
+
+- 📝 **Text-based** - focus on the content with Markdown, and then style them later
+- 🎨 **Themable** - themes can be shared and re-used as npm packages
+- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
+- 🤹 **Interactive** - embed Vue components to enhance your expressions
+- 🎥 **Recording** - built-in recording and camera view
+- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
+- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
+<br>
+<br>
+
+Read more about [Why Slidev?](https://sli.dev/guide/why)
+
+<!--
+You can have `style` tag in markdown to override the style for the current page.
+Learn more: https://sli.dev/features/slide-scope-style
+-->
+
 <style>
 h1 {
-    background: linear-gradient(to right, #8b5cf6, #06b6d4, #ec4899);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-	}
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
 </style>
 
-<div  class="pt-8">
-<h2 class="text-gray-500">Manish Datt</h2>
-</div>
-<div class="place-items-center">
-<img class="pt-20" src="./images/logo_final_transparent.png" width=5% />
-</div>
+<!--
+Here is another comment.
+-->
 
 ---
-transition: fade-out
+transition: slide-up
+level: 2
 ---
 
-# What is Bioinformatics
+# Navigation
 
-<div class="grid grid-cols-2 grid-rows-[auto,1fr] h-full">
-  <div class="p-4">
-  <figure>
-<img src="./images/paulien.jpg" width=65% />
-<figcaption><a href="https://ubc.uu.nl/introduction-50-years-bioinformatics/">Paulien Hogeweg</a></figcaption>
-</figure>
-</div>
-  <div class="p-4">
-  <figure>
-<img src="./images/ben_hesper.jpg" width=30% />
-<figcaption><a href="https://ubc.uu.nl/introduction-50-years-bioinformatics/">Ben Hesper</a></figcaption>
-</figure>
-</div>
+Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/ui#navigation-bar)
 
-</div>
+## Keyboard Shortcuts
 
-<div v-click class="text-center">
-<h2> The study of informatic processes in biotic systems. </h2>
-</div>
+|                                                     |                             |
+| --------------------------------------------------- | --------------------------- |
+| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
+| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
+| <kbd>up</kbd>                                       | previous slide              |
+| <kbd>down</kbd>                                     | next slide                  |
 
+<!-- https://sli.dev/guide/animations.html#click-animation -->
+<img
+  v-click
+  class="absolute -bottom-9 -left-7 w-80 opacity-50"
+  src="https://sli.dev/assets/arrow-bottom-left.svg"
+  alt=""
+/>
+<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+
+---
+layout: two-cols
+layoutClass: gap-16
+---
+
+# Table of contents
+
+You can use the `Toc` component to generate a table of contents for your slides:
+
+```html
+<Toc minDepth="1" maxDepth="1" />
+```
+
+The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
+
+::right::
+
+<Toc text-sm minDepth="1" maxDepth="2" />
+
+---
+layout: image-right
+image: https://cover.sli.dev
+---
+
+# Code
+
+Use code snippets and get the highlighting directly, and even types hover!
+
+```ts {all|5|7|7-8|10|all} twoslash
+// TwoSlash enables TypeScript hover information
+// and errors in markdown code blocks
+// More at https://shiki.style/packages/twoslash
+
+import { computed, ref } from 'vue'
+
+const count = ref(0)
+const doubled = computed(() => count.value * 2)
+
+doubled.value = 2
+```
+
+<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
+
+<!-- This allow you to embed external code blocks -->
+<<< @/snippets/external.ts#snippet
+
+<!-- Footer -->
+
+[Learn more](https://sli.dev/features/line-highlighting)
+
+<!-- Inline style -->
+<style>
+.footnotes-sep {
+  @apply mt-5 opacity-10;
+}
+.footnotes {
+  @apply text-sm opacity-75;
+}
+.footnote-backref {
+  display: none;
+}
+</style>
+
+<!--
+Notes can also sync with clicks
+
+[click] This will be highlighted after the first click
+
+[click] Highlighted with `count = ref(0)`
+
+[click:3] Last click (skip two clicks)
+-->
+
+---
+level: 2
+---
+
+# Shiki Magic Move
+
+Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
+
+Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
+
+````md magic-move {lines: true}
+```ts {*|2|*}
+// step 1
+const author = reactive({
+  name: 'John Doe',
+  books: [
+    'Vue 2 - Advanced Guide',
+    'Vue 3 - Basic Guide',
+    'Vue 4 - The Mystery'
+  ]
+})
+```
+
+```ts {*|1-2|3-4|3-4,8}
+// step 2
+export default {
+  data() {
+    return {
+      author: {
+        name: 'John Doe',
+        books: [
+          'Vue 2 - Advanced Guide',
+          'Vue 3 - Basic Guide',
+          'Vue 4 - The Mystery'
+        ]
+      }
+    }
+  }
+}
+```
+
+```ts
+// step 3
+export default {
+  data: () => ({
+    author: {
+      name: 'John Doe',
+      books: [
+        'Vue 2 - Advanced Guide',
+        'Vue 3 - Basic Guide',
+        'Vue 4 - The Mystery'
+      ]
+    }
+  })
+}
+```
+
+Non-code blocks are ignored.
+
+```vue
+<!-- step 4 -->
+<script setup>
+const author = {
+  name: 'John Doe',
+  books: [
+    'Vue 2 - Advanced Guide',
+    'Vue 3 - Basic Guide',
+    'Vue 4 - The Mystery'
+  ]
+}
+</script>
+```
+````
+
+---
+
+# Components
+
+<div grid="~ cols-2 gap-4">
 <div>
-<p v-click>
-Life is information processing in its various forms, e.g., information accumulation during evolution, information transmission from DNA to intra- and intercellular processes, and the interpretation of such information at multiple levels. 
-</p>
-<p v-click>
-<span v-mark.box.orange="4"> Information processing </span>could serve as a useful metaphor for understanding living systems. Therefore, in addition to <span v-mark.underline.orange="5">bio</span>physics and <span v-mark.underline.orange="5">bio</span>chemistry, it was useful to distinguish <span v-mark.highlight.orange="6">bioinformatics</span> as a research field.
-</p>
+
+You can use Vue components directly inside your slides.
+
+We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
+
+```html
+<Counter :count="10" />
+```
+
+<!-- ./components/Counter.vue -->
+<Counter :count="10" m="t-4" />
+
+Check out [the guides](https://sli.dev/builtin/components.html) for more.
+
+</div>
+<div>
+
+```html
+<Tweet id="1390115482657726468" />
+```
+
+<Tweet id="1390115482657726468" scale="0.65" />
+
+</div>
 </div>
 
+<!--
+Presenter note with **bold**, *italic*, and ~~striked~~ text.
+
+Also, HTML elements are valid:
+<div class="flex w-full">
+  <span style="flex-grow: 1;">Left content</span>
+  <span>Right content</span>
+</div>
+-->
+
 ---
-transition: slide-left
+class: px-20
 ---
 
-# What is Bioinformatics
+# Themes
+
+Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
+
+<div grid="~ cols-2 gap-2" m="t-2">
+
+```yaml
+---
+theme: default
+---
+```
+
+```yaml
+---
+theme: seriph
+---
+```
+
+<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
+
+<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
+
+</div>
+
+Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and
+check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery).
+
+---
+
+# Clicks Animations
+
+You can add `v-click` to elements to add a click animation.
+
+<div v-click>
+
+This shows up when you click the slide:
+
+```html
+<div v-click>This shows up when you click the slide.</div>
+```
+
+</div>
 
 <br>
 
-<br>
+<v-click>
 
-<p v-click class="text-3xl" style="line-height:1.5em;"> Put simply, bioinformatics is the science of <span v-mark.underline.orange="2">storing, retrieving</span> and <span v-mark.underline.blue="3">analyzing</span> <span v-mark.underline.green="4">large amounts</span> of <span v-mark.underline.purple="5" v-mark.circle.purple="6">biological information.</span></p>
+The <span v-mark.red="3"><code>v-mark</code> directive</span>
+also allows you to add
+<span v-mark.circle.orange="4">inline marks</span>
+, powered by [Rough Notation](https://roughnotation.com/):
 
-<br>
+```html
+<span v-mark.underline.orange>inline markers</span>
+```
 
-<p v-after class="text-sm text-right"><a href="https://www.ebi.ac.uk/training/online/courses/bioinformatics-terrified/what-bioinformatics/">ebi.ac.uk</a></p>
-<!-- <img src="https://media.springernature.com/w440/springer-static/cover-hires/journal/41586/409/6822" width=30% /> -->
+</v-click>
+
+<div mt-20 v-click>
+
+[Learn more](https://sli.dev/guide/animations#click-animation)
+
+</div>
 
 ---
-transition: fade-out
-hide: true
----
 
-# Central Dogma
+# Motions
 
-<div class="items-center text-center text-2xl">
-<button class="border-2 border-blue-500 rounded-lg px-2" @click="showDiv('CD_DNA')">DNA</button> <carbon:arrow-right /> <button class="border-2 border-blue-500 rounded-lg px-2" @click="showDiv('CD_RNA')">RNA</button> <carbon:arrow-right /> <button class="border-2 border-blue-500 rounded-lg px-2" @click="showDiv('CD_PROTEIN')">Protein</button>
+Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
+
+```html
+<div
+  v-motion
+  :initial="{ x: -80 }"
+  :enter="{ x: 0 }"
+  :click-3="{ x: 80 }"
+  :leave="{ x: 1000 }"
+>
+  Slidev
+</div>
+```
+
+<div class="w-60 relative">
+  <div class="relative w-40 h-40">
+    <img
+      v-motion
+      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
+      :enter="final"
+      class="absolute inset-0"
+      src="https://sli.dev/logo-square.png"
+      alt=""
+    />
+    <img
+      v-motion
+      :initial="{ y: 500, x: -100, scale: 2 }"
+      :enter="final"
+      class="absolute inset-0"
+      src="https://sli.dev/logo-circle.png"
+      alt=""
+    />
+    <img
+      v-motion
+      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
+      :enter="final"
+      class="absolute inset-0"
+      src="https://sli.dev/logo-triangle.png"
+      alt=""
+    />
+  </div>
+
+  <div
+    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
+    v-motion
+    :initial="{ x: -80, opacity: 0}"
+    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
+    Slidev
+  </div>
 </div>
 
-<div :class="{ hidden: activeDiv !== 'CD_DNA' }" class="CD_DNA">
-<div v-click>
-Genomics
-</div>
-<div v-click>
-Genome annotation, Comparative genomics, Genome-wide association studies
-</div>
-</div>
-
-<div :class="{ hidden: activeDiv !== 'CD_RNA' }" class="CD_RNA">
-<div v-click>
-Transcriptomics
-</div>
-<div v-click>
-RNA-seq, DGE, ncRNA, RNA structure prediction, RNA design
-</div>
-</div>
-
-<div :class="{ hidden: activeDiv !== 'CD_PROTEIN' }" class="CD_PROTEIN">
-<div v-click>
-Proteomics
-</div>
-<div v-click>
-functional annotation, structure prediction, PPI, PTMs,
-</div>
-</div>
-
-<div v-click>
-sequencing, phylogenetics, metagenomics, epigenomics,
-</div>
-
-<script setup>
-import { ref } from 'vue';
-
-const activeDiv = ref(null);
-
-function showDiv(divId) {
-  activeDiv.value = divId;
+<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
+<script setup lang="ts">
+const final = {
+  x: 0,
+  y: 0,
+  rotate: 0,
+  scale: 1,
+  transition: {
+    type: 'spring',
+    damping: 10,
+    stiffness: 20,
+    mass: 2
+  }
 }
 </script>
 
----
-transition: fade-out
----
+<div
+  v-motion
+  :initial="{ x:35, y: 30, opacity: 0}"
+  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
 
-# Central Dogma
-
-<div class="items-center text-center text-2xl">
-<button class="border-2 border-blue-600 rounded-lg px-2">DNA</button> <carbon:arrow-right /> <button class="border-2 border-cyan-600 rounded-lg px-2">RNA</button> <carbon:arrow-right /> <button class="border-2 border-green-600 rounded-lg px-2">Protein</button>
-</div>
-
-<div class="grid grid-cols-3 h-full">
-<div class="CD_DNA">
-<p v-click class="text-blue-600 text-3xl pt-4 text-center">
-Genomics
-</p>
-<p v-click class="text-xl pt-2">
-Genome annotation, Comparative genomics, Genome-wide association studies
-</p>
-</div>
-
-<div class="CD_RNA">
-<p v-click class="text-cyan-600 text-3xl pt-4 text-center">
-Transcriptomics
-</p>
-<p v-click class="text-xl pt-2">
-RNA-seq, DGE, ncRNA, RNA structure prediction, RNA design
-</p>
-</div>
-
-<div class="CD_PROTEIN">
-<p v-click class="text-green-600 text-3xl pt-4 text-center">
-Proteomics
-</p>
-<p v-click class="text-xl pt-2">
-functional annotation, structure prediction, PPI, PTMs,
-</p>
-</div>
+[Learn more](https://sli.dev/guide/animations.html#motion)
 
 </div>
 
-<div v-click class="text-3xl pt-2 text-center font-bold">
-Sequencing
-</div>
-
-<div v-click class="text-2xl pt-2 text-center">
-Phylogenetics
-</div>
-
-<div v-click class="text-2xl pt-2 text-center">
-Metagenomics, Epigenomics, ...
-</div>
-
-
----
-transition: fade-out
-hide: true
 ---
 
+# LaTeX
 
-# Why study Bioinformatics
+LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
 
-For research
-<img src="./images/Human_Genome_Science.png" width=30% />
+<div h-3 />
 
----
-transition: slide-left
----
+Inline $\sqrt{3x-1}+(1+x)^2$
 
-# Biological Databases
+Block
+$$ {1|3|all}
+\begin{aligned}
+\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
+\nabla \cdot \vec{B} &= 0 \\
+\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
+\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
+\end{aligned}
+$$
 
-<br>
-
-## Online libraries that contain structured information about living organisms.
-
-<p v-click class="text-2xl p-4">
-Convenient, computable access to prior knowledge that is vital for planning future experiments and for discovering new knowledge through data mining. 
-</p>
-
-<p v-click class="text-2xl p-4">
-Databases can be of different types depending upon their information content.
-</p>
-
+[Learn more](https://sli.dev/features/latex)
 
 ---
-transition: slide-left
----
 
-# Biological Databases --- Nucleic Acid Research
+# Diagrams
 
+You can create diagrams / graphs from textual descriptions, directly in your Markdown.
 
-<!-- ## <p class="text-blue-500">Nucleic Acid Research --- Databases</p>  -->
+<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
 
+```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
+sequenceDiagram
+    Alice->John: Hello John, how are you?
+    Note over Alice,John: A typical interaction
+```
 
-<iframe src="https://www.oxfordjournals.org/nar/database/c/" width="800" height="400"></iframe>
+```mermaid {theme: 'neutral', scale: 0.8}
+graph TD
+B[Text] --> C{Decision}
+C -->|One| D[Result 1]
+C -->|Two| E[Result 2]
+```
 
----
-transition: slide-left
----
+```mermaid
+mindmap
+  root((mindmap))
+    Origins
+      Long history
+      ::icon(fa fa-book)
+      Popularisation
+        British popular psychology author Tony Buzan
+    Research
+      On effectiveness<br/>and features
+      On Automatic creation
+        Uses
+            Creative techniques
+            Strategic planning
+            Argument mapping
+    Tools
+      Pen and paper
+      Mermaid
+```
 
-# Biological Databases --- Development
+```plantuml {scale: 0.7}
+@startuml
 
-<figure class="text-right text-sm">
-<img src="./images/Database_commons_2.jpg" />
-<figurecaption><a href="https://academic.oup.com/gpb/article/21/5/1054/7632866">Database Commons</a></figurecaption>
-</figure>
-
-<br>
-
-<p class="pt-8 text-2xl text-center" v-click>
-Ten Simple Rules for Developing Public Biological Databases. <a class="text-sm" href="https://doi.org/10.1371/journal.pcbi.1005128" target="_blank">PLOS One</a>
-</p>
-
----
-transition: slide-left
-hide: true
----
-# NGS
-
-https://pmc.ncbi.nlm.nih.gov/articles/PMC4633438/pdf/40142_2015_Article_76.pdf
-
-https://web.natur.cuni.cz/~muncling/Metzker%202010%20Next%20generation%20sequencing.pdf
-
-<button bg="blue-400" p="y-2 x-4" rounded @click="greet">Greet</button> 
-
-<script setup>
-function greet(){
-	alert("HI");
+package "Some Group" {
+  HTTP - [First Component]
+  [Another Component]
 }
-</script>
 
----
-transition: slide-left
----
-# NGS -- Illumina
+node "Other Groups" {
+  FTP - [Second Component]
+  [First Component] --> FTP
+}
 
-<div class="flex justify-center">
-<Youtube id="EDVKxSNdSic" width=600 height=400 />
+cloud {
+  [Example 1]
+}
+
+database "MySql" {
+  folder "This is my folder" {
+    [Folder 3]
+  }
+  frame "Foo" {
+    [Frame 4]
+  }
+}
+
+[Another Component] --> [Example 1]
+[Example 1] --> [Folder 3]
+[Folder 3] --> [Frame 4]
+
+@enduml
+```
+
 </div>
 
----
-transition: slide-left
----
-
-# Bioinformatics Education 
-
-<p class="text-2xl">Important challenges</p>
-
-<img v-click src="./images/Bioinfo_edu_barrier_1.png" />
-
-<p v-after class="text-sm text-right"><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0224288">PLOS One, 2019</a></p>
+Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML Diagrams](https://sli.dev/features/plantuml)
 
 ---
-transition: slide-left
+foo: bar
+dragPos:
+  square: 691,32,167,_,-16
 ---
 
-# Bioinformatics Education 
+# Draggable Elements
 
-<img src="./images/Bioinfo_edu_barrier_2.png" width=95% />
-
-<p class="text-sm text-right"><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0224288">PLOS One, 2019</a></p>
-
----
-transition: slide-left
----
-
-# Bioinformatics Skills
-
-<div class="flex justify-center">
-<img src="./images/Bioinfo_edu_skill_1_1.png" width=80%/>
-</div>
-
-<p v-click class="text-2xl"> S1 (Role) — Understand the role of computation and data mining in hypothesis-driven processes within the life sciences </p>
-
-<p v-click class="text-2xl"> S2 (Concepts) — Understand computational concepts used in bioinformatics, e.g., meaning of algorithm, bioinformatics file formats </p>
-
-<p v-click class="text-2xl"> S3 (Statistics) — Know statistical concepts used in bioinformatics, e.g., E-value, z-scores, t test, type-1 error, type-2 error, employ R </p>
-
-<p class="text-sm text-right"><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0196878">PLOS One, 2018</a></p>
-
----
-transition: slide-left
----
-
-# Bioinformatics Skills
-
-<div class="flex justify-center">
-<img src="./images/Bioinfo_edu_skill_1_2.png" width=40%/>
-</div>
-<img src="./images/Bioinfo_edu_skill_2.png"/>
-
-<p v-click class="text-2xl">S4, S6, S8, S10 — Know how to <span v-mark.underline.orange="1">access</span> relevant data.</p>
-
-<p v-click class="text-2xl">S5, S7, S9 — Be able to use bioinformatics tools to <span v-mark.underline.orange="2">analyze</span> relevant data.</p>
-
-<p class="text-sm text-right"><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0196878">PLOS One, 2018</a></p>
-
----
-transition: slide-left
----
-
-# Bioinformatics Skills
-
-<img src="./images/Bioinfo_edu_skill_3.png"/>
-
-<p v-click class="text-xl">S11—Be able to use bioinformatics tools to examine the flow of molecules within pathways/networks, e.g., Gene Ontology, KEGG</p>
-<p v-click class="text-xl">S12—Be able to use bioinformatics tools to examine metagenomics data, e.g., MEGA, MUSCLE</p>
-<p v-click class="text-xl">S13—Know how to write short computer programs as part of the scientific discovery process, e.g., write a script to analyze sequence data</p>
-<p v-click class="text-xl">S14—Be able to use software packages to manipulate and analyze bioinformatics data, e.g., Geneious, Vector NTI Express, spreadsheets</p>
-<p v-click class="text-xl">S15—Operate in a variety of computational environments e.g., Mac OS, Windows, web- or cloud-based, Linux command line</p>
-
-<p class="text-sm text-right"><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0196878">PLOS One, 2018</a></p>
-
----
-transition: slide-left
----
-
-# Bioinformatics Skills
-
-<img src="./images/Bioinfo_edu_skills.png" width=80%/>
-
-<p class="text-sm text-right"><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0196878">PLOS One, 2018</a></p>
-
-
----
-transition: slide-left
----
-
-# Bioinformatics -- Programming
-
-<div class="grid grid-cols-2 grid-rows-[auto,1fr] h-full p-4">
-  <div class="flex justify-center">
-<img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" width=65% />
-</div>
-  <div class="flex justify-center">
-<img src="https://www.r-project.org/logo/Rlogo.png" width=25% />
-</div>
-</div>
-
-<div v-click class="grid grid-cols-2 grid-rows-[auto,1fr] h-full p-2">
-  <div class="flex justify-center text-2xl">
-A high-level, object-oriented programming language.
-</div>
-  <div class="flex justify-center text-2xl">
-A language and environment for statistical computing and graphics.
-</div>
-</div>
-
-<div v-click class="grid grid-cols-2 grid-rows-[auto,1fr] h-full p-2">
-  <div class="text-2xl">
-Libraries like Biopython for Bioinformatics analysis.
-</div>
-  <div class="text-2xl">
-Packages like Bioconductor for bioinformatics analysis.
-</div>
-</div>
-
-<div v-click class="grid grid-cols-2 grid-rows-[auto,1fr] h-full p-4">
-  <div class="flex justify-center">
-Ebook:&nbsp; <a href="https://pythonbook.bioinfo.guru" target="_blank"> pythonbook.bioinfo.guru</a>
-</div>
-  <div class="flex justify-center">
-Ebook: &nbsp; <a href="https://rbook.bioinfo.guru" target="_blank"> rbook.bioinfo.guru</a>
-</div>
-</div>
-
----
-transition: slide-left
----
-
-# What is Bioinformatics
+Double-click on the draggable elements to edit their positions.
 
 <br>
 
+###### Directive Usage
+
+```md
+<img v-drag="'square'" src="https://sli.dev/logo.png">
+```
+
 <br>
 
-<p v-click class="text-3xl p-8" style="line-height:1.5em;">
-It is a highly interdisciplinary field involving many different types of specialists, including biologists, molecular life scientists, computer scientists and mathematicians.
-</p>
+###### Component Usage
 
-<br>
+```md
+<v-drag text-3xl>
+  <div class="i-carbon:arrow-up" />
+  Use the `v-drag` component to have a draggable container!
+</v-drag>
+```
 
-<p v-after class="text-sm text-right"><a href="https://www.ebi.ac.uk/training/online/courses/bioinformatics-terrified/what-bioinformatics/">ebi.ac.uk</a></p>
+<v-drag pos="663,206,261,_,-15">
+  <div text-center text-3xl border border-main rounded>
+    Double-click me!
+  </div>
+</v-drag>
+
+<img v-drag="'square'" src="https://sli.dev/logo.png">
+
+###### Draggable Arrow
+
+```md
+<v-drag-arrow two-way />
+```
+
+<v-drag-arrow pos="67,452,253,46" two-way op70 />
 
 ---
-transition: slide-left
-layout: statement
+src: ./pages/imported-slides.md
+hide: false
 ---
 
-# Thank you!
+---
 
-<p class="text-2xl pt-8">manish@<span style="font-family: 'Geo', sans-serif; color:#9c51e0;">bioinfo.guru</span></p>
+# Monaco Editor
+
+Slidev provides built-in Monaco Editor support.
+
+Add `{monaco}` to the code block to turn it into an editor:
+
+```ts {monaco}
+import { ref } from 'vue'
+import { emptyArray } from './external'
+
+const arr = ref(emptyArray(10))
+```
+
+Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
+
+```ts {monaco-run}
+import { version } from 'vue'
+import { emptyArray, sayHello } from './external'
+
+sayHello()
+console.log(`vue ${version}`)
+console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
+```
+
+---
+layout: center
+class: text-center
+---
+
+# Learn More
+
+[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
+
+<PoweredBySlidev mt-10 />
