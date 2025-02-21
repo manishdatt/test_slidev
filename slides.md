@@ -1,5 +1,5 @@
 ---
-theme: apple-basic
+theme: default
 title: Introduction to Bioinformatics
 transition: slide-left
 author: Manish Datt
